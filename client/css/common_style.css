@@ -1,0 +1,12 @@
+header{
+	margin-top: 3%;
+}
+
+footer{
+	margin-top: 10%;
+	border-top: solid 2px #eee;
+}
+
+.container{
+	width: 97%;
+}

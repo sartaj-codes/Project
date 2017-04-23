@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Change Detail</title>
+  <meta charset="utf-8"></meta>
+
+  <style>
+    .c1{
+  font-size: 25px;
+    font-weight: 900;
+    font-family: inherit;
+
+}
+.inp{
+  border-radius: initial;
+    margin-top: 3px;
+    margin-bottom: 20px;
+    width: 112% !important;
+    border: 1px solid rgba(204, 204, 204, 0.33) !important;
+
+}
+.inp2{
+ border-radius: initial;
+    margin-top: -9px;
+    margin-bottom: 20px;
+    width: 112% !important;
+    border: 1px solid rgba(204, 204, 204, 0.33) !important
+
+}
+.inp1{
+    margin-bottom: -12px;
+    margin-top: 8px;
+    border-radius: initial;
+    border: 1px solid rgba(204, 204, 204, 0.33) !important;
+}
+   
+.f2{
+    line-height: 370%;
+    margin-left: 13%;
+    margin-top: 3%;
+}
+.f1{
+  margin-left: 9%;
+    margin-top: 3%;
+    line-height: 180%;
+}
+
+.p1{
+  margin: 0 0 10px;
+    font-style: italic;
+    font-family: cursive;
+}
+.divi{
+  border: 1px solid rgba(195, 190, 190, 0.06);
+    margin-top: 24px;
+    width: 71%;
+}
+.bt1{
+    color: rgba(0, 0, 0, 0.81);
+    background-color: rgba(241, 235, 235, 0.22);
+    border-color: #e6e0e0;
+    /* border-radius: initial; */
+    font-weight: bold;
+    border-radius: 5px;
+    width: 112%;
+    border: 1px solid rgba(128, 128, 128, 0.35);
+
+
+}
+.bt1:hover{
+  background-color: black;
+    text-decoration: none;
+    color: white;
+}
+.bt1:focus{
+    background-color: black;
+    text-decoration: none;
+    color: white;
+}
+.change-nav{
+  font-size: 19px;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.16);
+    margin-left: 43px;
+    margin-right: 141px;
+}
+.change-navb{
+  margin-left: -46px;
+    margin-top: 25px;
+}
+.change-line1{
+   margin-left: 90px;
+}
+.change-line2{
+  margin-left: 214px;
+
+}
+ .f12{
+
+ } 
+  </style>
+
+</head>
+<body ng-app ="routeApp" ng-controller="changeDetail">
+  <nav class="navbar change-nav">
+  <ul class="nav navbar-nav change-navb">
+    <li class="change-line1"><a ui-sref=".personal">Personal Info</a></li>
+    <li class="change-line2"><a ui-sref=".account">Account Setting</a></li>
+  </ul>
+</nav>
+   
+<div class="row">
+  <div ui-view></div>
+</div>
+
+<br><br><br><br><br><br>
+ </body>
+
+</html>

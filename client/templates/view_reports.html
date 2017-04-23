@@ -1,0 +1,77 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"></meta>
+	<title>Reports</title>
+  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+  <link rel="stylesheet" type="text/css" href="z.css">-->
+
+   
+   <style>
+     #rep-head{
+    background: rgba(93, 91, 87, 0.08);
+    color: #151414;
+    font-size: 20px;
+   }
+.rep-h{
+  font-size: 60px;
+    text-align: center;
+   }
+.dn{
+      background-color: white;
+      border-bottom: 1px solid #e8e8e8;
+    }
+  .dhead{
+  padding-top: 36px;
+    margin-bottom: 23px;
+    font-size: xx-large;
+    font-family: monospace;
+}
+ </style>
+
+</head>
+<body style="background-color: white ;border-radius:20px;" >
+    <div id= "repot"> 
+    <!--<div class='wrap2 wr1'>
+         <div class='content'>        
+           <p>You've selected delete option for repors. Do you really Want
+              to delete this report.
+            </p>
+            <form>
+              <input type="submit" placeholder="confirm">
+            </form>   
+        </div>
+       </div> -->
+
+       <!-- Modal -->
+
+     
+     <div class="dn nav navbar-default "> 
+          <div class="navbar-header ">
+             <a href="#" class=" dhead navbar-brand" >
+              <img src="img/dashboard.jpg" height="50px" width="50px" style="display: inline; margin-top: -15%; ">
+              Reports
+            </a>
+          </div>
+     </div>
+    <div class="table-responsive"  style="margin-top: 10px">
+            <table class="table" style="margin-top: -2px;">
+              <tbody ng-repeat="reps in Reports">
+                <tr>
+                  <td><i class="fa fa-file-text-o" style="font-size:24px ;margin-right:10px;"></i>{{reps.title}}</td>
+                 
+                  <td class=""> <a href="#" data-toggle="tooltip" title=" {{reps.date}}" disabled>{{reps.type}}</a></td>
+                  
+         </tbody>
+    </table>
+    </div>
+  </div>  
+                    <script>
+                      $(document).ready(function(){
+                      $('[data-toggle="tooltip"]').tooltip();   
+                      });
+                    </script>
+                    
+                    
+</body>
+</html>

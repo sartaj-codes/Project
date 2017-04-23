@@ -1,0 +1,17 @@
+.dn{
+  margin-top: 3px;
+    padding-top: 15px;
+    background-color: white;
+    margin-left: 55px;
+    font-family: monospace;
+}
+.i1{
+	font-size: 25px;
+
+}
+.di1{
+   border-bottom: 1px solid rgba(2, 2, 2, 0.17);
+    margin-top: 48px;
+    width: 74%;
+    box-shadow: -6px -1px 7px rgb(187, 179, 179);
+}

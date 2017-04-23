@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.min.js"></script>
+<head>
+<style >
+    .dn{
+    	background-color: white;
+    	border-bottom: 1px solid #e8e8e8;
+    }
+	.dhead{
+	padding-top: 36px;
+    margin-bottom: 23px;
+    font-size: xx-large;
+    font-family: monospace;
+}
+</style>
+</head>
+<body  >
+<div class="dn nav navbar-default "> 
+   <div class="navbar-header ">
+            <a href="#" class=" dhead navbar-brand" >
+              <img src="img/dashboard.jpg" height="50px" width="50px" style="display: inline; margin-top: -15%; ">
+               DashBoard
+            </a>
+     </div>
+ </div>
+  <div id="chartContainer" style="height: 300px;width: 75%;margin-left: 10%;"  ng-controller="dashboard"></div>
+   <script >
+	 function graphfxn() {
+
+        angular.element(document).ready(function(){
+        var C_Ele = document.querySelector('#chartContainer');
+        var C_Ele_Scope = angular.element(C_Ele).scope();
+        var dps = C_Ele_Scope.data;
+        var _legend = "total number of reports :" + C_Ele_Scope._total;
+        
+        var chart = new CanvasJS.Chart("chartContainer",{
+      	theme: "theme3",
+        title :{
+      		text: "Reports Uploaded"
+      	},
+        animationEnabled: true,
+      	axisX:{
+      		valueFormatString: "DD MMM"
+      	},
+      	axisY: {						
+      		title: "Number of Reports"
+      	},
+        legend:{
+        verticalAlign: "top",
+        horizontalAlign: "centre",
+        fontSize: 18
+
+      },
+      	toolTip:{
+                  shared:true
+                 },
+      	data: [{
+      	type: "spline",
+				showInLegend: true,
+        legendMarkerType: "none",       
+        legendText: _legend,
+        markerType: "square",
+				lineThickness: 3,
+				name: "Reports",
+			  dataPoints : dps
+      	}]
+      });
+
+      chart.render();
+     });      
+      
+    }
+    
+   </script>
+  
+   <br><br><br>
+ </body>
+</html>

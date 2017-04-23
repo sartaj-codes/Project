@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pateint</title>
+  <meta charset="utf-8"></meta>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+	<link rel="stylesheet" type="text/css" href="css/patient_style.css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/canvasjs.min.js"></script>
+  <script type="text/javascript" src = "js/app/patient_java.js"></script>
+  <script type="text/javascript" src = "js/app/changeInfo.js"></script>
+  <script type="text/javascript" src = "js/controllers/editDetail_controller.js"></script>
+  <script type="text/javascript" src = "js/controllers/server_controller.js"></script>
+  <script type="text/javascript" src = "js/controllers/veiwsReps_controller.js"></script>
+  <script type="text/javascript" src = "js/controllers/Dashboard_controller.js"></script>
+  <script type="text/javascript" src = "js/controllers/linking_controller.js"></script>
+</head>
+
+<body ng-app = "routeApp" style="background-color: rgba(158, 158, 158, 0.08);" id="backgrd"  ng-controller="myCtrl" >
+
+<!--******************************* This is all about Navbar that is on top ********************************************-->
+      <div class=" my-navbar nav navbar-default navbar-fixed-top">
+              <div class="navbar-header ">
+                    <a href="#" class=" my-brand navbar-brand" >
+                        <img src="img\logo.png" height="60px" width="60px" style="display: inline; margin-top: -15%; padding-right:3%;">
+                         MedCare</a>
+               </div>
+                    <ul class=" my-icon nav navbar-nav navbar-right" ng-controller='dashboard'>
+             	       <li ><abbr class="abrt" title="Upload Report"><a class=" button" id="cmp"  data-toggle="modal" data-target="#myModal"><img class="upicon" src="img\upicon.jpg"></a></abbr></li>
+             	      
+
+<!-- ********************** Pending request dropDown here with count of pending requests ***************************** --> 
+                     <li>
+                        <a class="dropdown-toggle" data-toggle="dropdown">
+                          <img class="reqst avatar" src="img\reqst.jpg">
+                          <button class="Nbtn" ng-show="flag">
+                            <p class="NbtnH" >{{_pending}}</p>
+                          </button>
+                        </a>
+                        <ul class="dr-l dropdown-menu" style="width: 500px; height: 500px; overflow-y: scroll;">
+                          <div ><img class="dmlogin" src="img/trian.jpg"></div>
+                            <div  class="penHeader1"><h6><strong>Report Requests</strong></h6></div>
+                          
+                            <table class="table" style="margin-top: -2px;">
+                              <tbody ng-repeat="pend in pending">
+                               <tr>
+                                <td style="font-size: 16px;margin-right: 95px;">
+                                   <div class="row">
+                                      <div class="col-sm-3 uppp1">
+                                         <img  class="avatar" ng-src={{pend.secure_url}} style= " width: 63px; height: 54px;
+                                            border: 1px solid rgba(167, 159, 159, 0.6);"></i> 
+                                      </div>
+                                      <div class="col-sm-9 uppp2"> 
+                                         <H7 class="pen_img">{{pend.title}}</H7><br>
+                                         <H7 style="font-size: smaller;"> sartaj singh</H7>
+                                      </div>
+                                     </div>  
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary penHB1" ng-click="AddReport(pend._id)">Confirm</button>
+                                    <button class="btn btn-primary penHB2" ng-click="delReport(pend._id)">Delete Request</button>
+                                </td>
+                               </tr>
+                              </tbody>
+                            </table>
+                        </ul>
+                    </li> 
+<!-- ***************************************************************************************************************** -->                    
+
+<!-- ***************************  user-dropdown for change details logout n all **************************************-->  
+             	      <li><a  class="dropdown-toggle" data-toggle="dropdown">
+             	          <img  class="avatar" ng-src="{{myWelcome.secure_url}}" style="border-radius: 50%" width="30" height="30">
+             	       </a>
+                   
+             	       <ul class="dr-l1 dropdown-menu">
+                          <div ><img class="dmlogin1" src="img/trian.jpg"></div>
+             	            <li>&nbsp; &nbsp;Signed in as<br></li>
+                          <li><a><strong> {{myWelcome.name}}</strong></a></li>
+                          <div class="divider"></div>
+                          <li><a ui-sref="change.personal">Your Profile<br></a></li>
+                          <li><a ui-sref="viewRep">Reports<br></a></li>
+                          <li><a>Help<br></a></li>
+                           <div class="divider"></div>
+                          <li><a>Settings<br></a></li>
+                          <li><a>Logout<br></a></li>
+                     </ul>
+                    </li>
+            </div>
+<!-- *****************************************************************************************************************-->
+        
+
+<!--*************************** this is all about user includes img user name emails *********************************-->  
+  <div class="row" >
+	  <div class="lrow-color col-md-2 visible-md visible-lg " >
+	 		 <div><a class=" button" id="cmp"  data-toggle="modal" data-target="#myModal2">
+	 		    <img class="u-img" ng-src="{{myWelcome.secure_url}}"  img-responsive></a>
+             <br><br>
+             <h2 class="pateint">{{myWelcome.name}}</h2>
+             <div class="divider"></div>
+         </div>
+            <ul class="lrow-nbar ">
+              <li ><a class="lrow-bar" ui-sref="dashboard" onclick="graphfxn()" ><span class="glyphicon glyphicon-tasks">   </span>&nbsp;DASHBOARD</a></li><br>
+                	<li ><a class="lrow-bar" ui-sref="viewRep"><span class="glyphicon glyphicon-open-file"></span>&nbsp;REPORTS</a></li><br>
+                	<li ><a class="lrow-bar button" id="cmp" data-toggle="tooltip" title="This functionality will work soon!" disabled><span class="glyphicon glyphicon-grain"></span>&nbsp;COMPARE</a></li><br>
+                	<li >
+                  <a ui-sref="share" class="  lrow-bar lin1"  id="cmp"  >
+                    <span class="glyphicon glyphicon-link"></span>&nbsp;LINK ACCOUNT
+                  </a>
+                </li>
+               <li>
+                  <a data-target="#myModal3" data-toggle="modal"  class="lrow-bar" style="margin-top: 22px"><span class="glyphicon glyphicon-link"></span>&nbsp;SHARE</a>
+               </li>
+      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+      <li> Share D</li>
+            </ul>
+      </div>
+
+ <!--******************************************************************************************************************-->     
+
+
+ <!--****************************************** ROW-COL2 MODAL-1 (upload report) ************************************** -->   
+   <div class="rrow col-md-10 " style="background-color: white; font-family: monospace;" >
+     <div ui-view></div>
+      <div id="myModal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+              <div class="modal-content upmodal">
+                <div class="modal-header uplheader">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                   <h4 class="modal-title" style="text-align: center;">Upload Report</h4>
+                </div>
+                <div class="modal-body" ng-controller='dashboard'>
+                  <form class="upload-form" name="upfrm" >
+                      <div class="form-inline">
+                          <input type="text" name = "id" ng-model="Pid" style="display: none;" >
+                          <input type="text" name = "url" ng-model="url" style="display: none;">
+                          <input type="text" class="form-control" placeholder="Title.." id="tit" name="title" ng-model="title" 
+                          style="border-radius:initial;width: 117%;margin-left: -60px;"  ng-required="true" /><br>
+                          <span ng-show="upfrm.title.$touched && upfrm.title.$invalid">The name is required.</span>
+                          <input type="text" class="form-control" placeholder="Type.." id="ty" name="type"  style="
+                          margin-left: -59px; width: 117%; border-radius: initial;
+                          " ng-model="type" /><br>
+                          <textarea class="form-control" id="upload-form-ta" placeholder="Add an optional extended description..."></textarea>
+                          <br>  
+                         <input  class="form-control" placeholder="Choose Report .." id="upload-f" disabled="disabled"/>
+                          <div class="fileUpload btn upload-form-button" >
+                              <span><strong>Add</strong></span>
+                              <input id="uploadBtn" type="file" class="upload" />
+                         </div>
+                        
+                          <!--<input type="file" name="" ng-model="filepath">-->
+                         <br>
+                         <div class="upload-button">
+                               <button class="btn  upload-form-button1" ng-click="uploadRepo(Pid, title, type, url)"        ng-disabled="(!(title) || !(type))" data-dismiss="modal">Submit
+                               </button>
+                        </div>
+                      </div>
+                    </form>
+                </div>
+               
+              </div>
+          </div>
+       </div>
+<!-- *****************************************************************************************************************-->       
+
+<!-- ********************************************* MODEL-2(upload-img) ************************************************-->
+  <div id="myModal2" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+              <div class="modal-content upmodal">
+                <div class="modal-header uplheader">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                   <h4 class="modal-title" style="text-align: center;">Change Pofile Picture</h4>
+                </div>
+                <div class="modal-body ">
+                  <form class="upload-form1" action = "http://localhost:8081/up" method="POST" enctype="multipart/form-data" name="frm" target="_self" novalidate>
+                    <input type="text" name="abc" style="display: none;" ng-model="Pid"/>
+                    <input type="file" name = "file" id="upo" ng-model="path" /><br>
+                    <div class="upload-button">
+                        <button class="btn  upload-form-button1"  ng-click="funcR()" ng-disabled="!(path)" id="ds1cmp" >
+                          Submit
+                        </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+          </div>
+       </div>
+<!-- *******************************************************************************************************************-->
+ 
+
+<!-- **************************************** MODEL-3 (Linked Accounts) ***********************************************-->
+ <div id="myModal3" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+              <div class="modal-content upmodal">
+                <div class="modal-header uplheader">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                   <h4 class="modal-title" style="text-align: center;">Linked Accounts </h4>
+                   <!--<div class="editt"></div>-->
+                </div>
+                <div class="modal-body ">
+                     <table class="table" style="margin-top: -2px;">
+                        <tbody>
+                           <tr>
+                             <td style="font-size: 16px;margin-right: 95px;">
+                               <div class="row">
+                                   <div class="col-sm-3 uppp1_l">
+                                      <img  class="avatar" src="https://res.cloudinary.com/medcare/image/upload/v1492582777/hxkojsglf3dq5vblbcob.jpg" style= " width: 103px; height: 94px;
+                                      border: 1px solid rgba(167, 159, 159, 0.6);"></i> 
+                                    </div>
+                                 <div class="col-sm-9 uppp2"> 
+                                    <H7 class="pen_img_l">Hardeep Singh</H7><br>
+                                    <H7 style="font-size: 15; margin-left: 29px"> <b>AGE</b>: 50&nbsp;
+                                       <b>Reports</b>: 25
+                                    </H7><br>
+                                    <H7 style="font-size: 15; margin-left: 29px;"><b>Relation</b> : F <-> S</H7>
+                                 </div>
+                               </div>  
+                              </td>
+                            </tr>
+                          </tbody>
+                      </table>  
+                  <button class="btn btn-primary link-buttn" ng-show="false">Add Account</button>
+                </div>
+              </div>
+          </div>
+       </div>
+ <!-- ******************************************************************************************************************--> 
+<!-- **************************** For sending request to new user module will here  *********************************-->       
+        <!-- <div class=' wr1'>
+             <div class='content'>
+               <div class="dn2 nav navbar-default "> 
+                <div class="navbar-header ">
+                    <a href="#" class="i1  navbar-brand" >
+                       <img  src="img/sendrq.jpg" height="50px" width="50px" style="display: inline; margin-top: -15%; ">
+                      Link Account
+                   </a>
+                 </div>
+                 <form>
+                    <br><br>
+                    <input type="email" class="semail" placeholder="Add sender username.. " /><br>
+                    <button class="btn btn-primary btt" id="bttcl" >Send</button>
+                </form>
+             </div>
+          </div>
+        </div>
+        
+       <div class=" familym col-md-2 pull-right" style="background-color: white; font-family: monospace;">
+             <h4>Family Members</h4>
+             <hr>
+               <div ng-repeat="reps in myWelcome.Reports">
+                 <h4>Name</h4>
+               </div>
+        </div>
+</div>-->
+                 <script >
+                    function myFunction() 
+                       {
+                         var x = document.getElementById("Demo");
+                         
+                          document.getElementById("uploadBtn").onclick = function () {
+                          document.getElementById("upload-f").value = this.value;
+                            }
+                        }    
+                     </script> 
+                
+</body> 
+</html>

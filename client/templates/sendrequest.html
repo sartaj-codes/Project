@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Send Request</title>
+	<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/> -->
+	<style>
+		.send_req_brand{
+			margin-top: 33px;
+            background: white;
+            border-bottom: 1px solid rgba(128, 128, 128, 0.26);
+        }
+		.send_req_brand_h{
+         margin-left: 26px;
+    margin-top: -12px;
+		}
+		.send_req_semail{
+          margin-left: 67px;
+          border-radius: initial;
+		}
+		.send_req_btt{
+           border: hidden;
+           border-radius: inherit;
+           padding: 7px;
+           background-color: grey;
+		}
+		.send_req_user{
+          margin-top: 13px;
+		}
+		.send_req_form_2{
+
+		}
+	</style>
+</head>
+<body ng-app ="routeApp" ng-controller="linking">
+    <div class="send_req_brand nav navbar-default "> 
+        <div class="navbar-header ">
+             <a  class="  navbar-brand" >
+                  <h1 class="send_req_brand_h">Link Account</h1>
+             </a>
+        </div>
+    </div> 
+    <div   class="container">
+        <div>
+                 <form class="form-inline send_req_form">
+                   <div class="form-group send_req_form_2">
+                    <br><br>
+                    <input type="text" class="send_req_semail form-control" ng-model="Pname" placeholder="Add sender username.. " />
+                    <button class="btn btn-primary send_req_btt" id="bttcl" ng-click="findUser()" ng-disabled ="!Pname">Find Patient</button>
+                   </div>
+                </form>
+         </div>
+        <div class="row send_req_user">
+           <table class="table">
+           	 <tbody ng-repeat= "user in Users">
+           	 	<tr>
+                  <td style="font-size: 16px;margin-right: 95px;">
+                    <div class="row">
+                      <div class="col-sm-1 uppp1">
+                        <img  class="avatar" ng-src={{user.secure_url}} style= " width: 63px; height: 54px;
+                          border: 1px solid rgba(167, 159, 159, 0.6);"></i> 
+                       </div>
+                        <div class="col-sm-2 uppp2"> 
+                           <H7 class="pen_img">{{user.name}}</H7><br>
+                           <H7 style="font-size: smaller;"> sartaj singh</H7>
+                         </div>
+                         <button class="btn btn-primary " ng-click="">Link</button>
+                    </div>  
+                  </td>
+                </tr>
+           	 </tbody>
+           </table>
+        </div>
+    </div>     
+   </body>
+</html>
