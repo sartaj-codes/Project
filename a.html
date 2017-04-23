@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js"></script>
+
+<title>practice</title>
+</head>
+<body ng-app = "app" ng-controller="myCtrl">
+  <form>
+   <input type="file" ng-file-select="fileSelected($files)" accept="'image/*'">
+   <input type="submit" ng-click="uploadFile()" >
+ </form>
+   
+<script>
+ var app = angular.module("app", ['angularFilesUpload']);
+ app.controller("myCtrl", ['$scope', '$http' ,'fileUpload' , function($scope,$http, $upload){
+   
+   //$scope.icon = "https://res.cloudinary.com/medcare/image/upload/v1492149148/single_page_pdf_jlzoly.pdf";
+  /*$scope.fxn = function(){ 
+   console.log($scope.path);
+   $http({
+    method: 'POST',
+    url: 'http://localhost:9096/up/' + $scope.path,
+   })
+    .then(function(icons) {
+      $scope.icon = icons.data;
+    });
+   };
+ 
+*/
+$scope.uploadFile = function(){
+ 
+ $scope.fileSelected = function(files) {
+     if (files && files.length) {
+        $scope.file = files[0];
+     }
+ 
+     $upload.upload({
+       url: '/api/upload', 
+       file: $scope.file
+     })
+     .success(function(data) {
+       console.log(data, 'uploaded');
+      });
+ 
+    };
+};
+}])
+
+
+
+
+</script>
+</body>
+</html>
