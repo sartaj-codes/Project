@@ -599,3 +599,18 @@ a{
     font-weight: bold;
     color: rgba(68, 66, 66, 0.91);
 }
+.link_re_bod{
+      border-bottom: 1px solid rgba(128, 128, 128, 0.23);
+}
+.link_re_btte1{
+      max-width: 67px;
+    padding: 1px;
+    margin-left: 3px;
+}
+.link_re_btte2{
+   max-width: 110px;
+    padding: 3px;
+    background-color: rgba(128, 128, 128, 0.29);
+    border: black;
+    color: black;
+}

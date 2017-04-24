@@ -17,6 +17,7 @@ $http({
    })
    .then(function(response){
     $scope.Pid       = response.data[0]._id;
+    $scope.linkreq   = response.data[0].link_request.length;
     
 /* This reuest is for graph while checking Reports */  
     $http({
@@ -75,7 +76,7 @@ $http({
    })
    .then(function(response){
         $scope.pending  = response.data;
-        $scope._pending = response.data.length; 
+        $scope._pending = response.data.length + $scope.linkreq; 
         if($scope._pending != 0)
           $scope.flag = true;
    });

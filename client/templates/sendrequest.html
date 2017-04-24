@@ -14,7 +14,7 @@
     margin-top: -12px;
 		}
 		.send_req_semail{
-          margin-left: 67px;
+          margin-left: -2px;
           border-radius: initial;
 		}
 		.send_req_btt{
@@ -50,25 +50,35 @@
                 </form>
          </div>
         <div class="row send_req_user">
-           <table class="table">
+          <input type="text" ng-model="Pid" style="display: hidden;">
+          <div class="col-md-6">
+            <table class="table">
            	 <tbody ng-repeat= "user in Users">
            	 	<tr>
                   <td style="font-size: 16px;margin-right: 95px;">
                     <div class="row">
-                      <div class="col-sm-1 uppp1">
+                      <div class="col-sm-2">
                         <img  class="avatar" ng-src={{user.secure_url}} style= " width: 63px; height: 54px;
                           border: 1px solid rgba(167, 159, 159, 0.6);"></i> 
                        </div>
-                        <div class="col-sm-2 uppp2"> 
-                           <H7 class="pen_img">{{user.name}}</H7><br>
-                           <H7 style="font-size: smaller;"> sartaj singh</H7>
-                         </div>
-                         <button class="btn btn-primary " ng-click="">Link</button>
-                    </div>  
+                        <div class="col-sm-9"> 
+                          <div class="col-sm-6">  
+                              <H7 class="pen_img">{{user.name}}</H7><br>
+                              <H7 style="font-size: smaller;"> sartaj singh</H7>
+                          </div>
+                          <div class="col-sm-6">   
+                              <button class="send_req_btt btn btn-primary" 
+                                  ng-click="linkAccount(Pid, user._id, myWelcome.name)" >
+                                  Send Request
+                              </button>
+                          </div> 
+                      </div>
                   </td>
                 </tr>
            	 </tbody>
            </table>
+         </div> 
+         <div class="col-md-6"></div> 
         </div>
     </div>     
    </body>

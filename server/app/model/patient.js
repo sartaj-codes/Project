@@ -71,7 +71,7 @@ var patientSchema = new Schema({
 	birth :{
 		 type: String,
 		 required: true,
-		 unique: true
+		 
 	},
 	password:{
 		type: String,
@@ -80,7 +80,11 @@ var patientSchema = new Schema({
 	},
 	secure_url:{
 		type:String
-	}
+	},
+
+	link_request :{    id   : {type: String, },
+		             name : {type : String, }
+	                },
 	/*lname:{
 		type: String,
 		required: true,
@@ -101,11 +105,11 @@ var patient = mongoose.model('patients', patientSchema);
 
 module.exports.addUserP = function(callback){
 new patient ({
-	     name       : "Shubham Verma",
-		 username   : "Shubi",
-		 email      : "ShubiV@gmail.com",
-		 birth      : "08-12-1996",
-		 password   : "Shubham",
+	     name       : "Virat Kohli",
+		 username   : "Kohli",
+		 email      : "ViratK@gmail.com",
+		 birth      : "08-12-1992",
+		 password   : "Virat",
 		 secure_url : "https://res.cloudinary.com/medcare/image/upload/v1492921169/z4a8csjtk3p0eoyavisk.png" 
 		}).save(function(err,doc){
 		if(err)
@@ -148,7 +152,7 @@ module.exports.updateUserP = function(id,first,em,bir, callback){
    	            });
 };
 
-module.exports.updateUserA = function(id,username,password, callback){
+module.exports.updateUserA = function(id, username,password, callback){
 	 patient.update({"_id" : id},
    	            {$set:{"username" : username,
    	                   "password" : password
@@ -170,6 +174,25 @@ module.exports.addImageUrl = function(id,url,callback){
 		         		return callback(doc,true);
 		         });
 };
+
 module.exports.getInfo = function(callback){
 	patient.find({},callback);
+};
+
+module.exports.sendRequest = function(sender, id, name, callback){
+	patient.update({"_id"   : id},
+		           {"$push" : 
+		              {
+		              	 "link_request" :
+		              	   {
+		              	   	  "id"    : sender ,
+		              	   	   "name" : name
+		              	   }
+		              }
+                    }, function(err,doc){
+                    	if(err)
+                    		return callback(err,false);
+                    	else
+                    		return callback(doc,true);
+                    });
 };

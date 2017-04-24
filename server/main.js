@@ -123,6 +123,20 @@ app.get('/infor', function(req,res){
 	});
 });
 
+/*This route is for send Request for Link an Account */ 
+app.post('/linkRequest/:_sender/:_id/:_name', function(req,res){
+	var sen  = req.params._sender;
+	var id   = req.params._id;
+	var name = req.params._name;
+	P_detail.sendRequest(sen, id, name, function(err,doc){
+		if(err)
+			res.json(err);
+		else
+			res.json(doc);
+	});
+
+});
+
 /*********************************************************************************************************************/
 
 /******************************* Below all are Reports related Routes ***********************************************/

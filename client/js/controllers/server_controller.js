@@ -20,6 +20,21 @@ app.controller('myCtrl',['$scope', '$http' , function($scope, $http){
 
 });
     
+$scope.linkAccount = function(sender, owner, name){
+  $http({
+    method : 'POST',
+      url    :  'http://localhost:8081/linkRequest/'+sender+'/'+ owner + '/' + name,
+  })
+     .then(function(response){
+             $scope.myWelcome = response.data;
+
+     });
+  
+};
+
+
+
+
 
 }]);
   

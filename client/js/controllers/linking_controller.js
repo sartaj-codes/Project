@@ -10,5 +10,6 @@ $scope.findUser = function(){
          $scope.Users = response.data;
      });
 };
+
   console.log("Under Linking");
 }]);

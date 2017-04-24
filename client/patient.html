@@ -48,8 +48,8 @@
                           <div ><img class="dmlogin" src="img/trian.jpg"></div>
                             <div  class="penHeader1"><h6><strong>Report Requests</strong></h6></div>
                           
-                            <table class="table" style="margin-top: -2px;">
-                              <tbody ng-repeat="pend in pending">
+                          <table class="table" style="margin-top: -2px;">
+                           <tbody ng-repeat="pend in pending" style=" border-bottom: 1px solid rgba(128, 128, 128, 0.39);">
                                <tr>
                                 <td style="font-size: 16px;margin-right: 95px;">
                                    <div class="row">
@@ -70,6 +70,26 @@
                                </tr>
                               </tbody>
                             </table>
+
+                          
+                          <div ng-repeat=" req in myWelcome.link_request">
+                            <div class="row link_re_bod">
+                              <div class="col-sm-8">
+                               <p>
+                                  <b>{{req.name}}</b>, has sent you a Request .<br>Do you want
+                                  to link Your Account.  
+                               </p>
+                             </div>
+                              <div class="col-sm-4">
+                                  <button class="btn btn-primary link_re_btte1" ng-click="AddReport(pend._id)">Confirm</button>
+                                    <button class="btn btn-primary link_re_btte2" ng-click="delReport(pend._id)">Reject</button>
+                              </div>
+                          </div>
+                        </div>
+
+
+
+
                         </ul>
                     </li> 
 <!-- ***************************************************************************************************************** -->                    
@@ -117,8 +137,6 @@
                <li>
                   <a data-target="#myModal3" data-toggle="modal"  class="lrow-bar" style="margin-top: 22px"><span class="glyphicon glyphicon-link"></span>&nbsp;SHARE</a>
                </li>
-      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-      <li> Share D</li>
             </ul>
       </div>
 
