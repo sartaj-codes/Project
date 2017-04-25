@@ -16,8 +16,8 @@ $http({
     url: 'http://localhost:8081/infor'
    })
    .then(function(response){
-    $scope.Pid       = response.data[0]._id;
-    $scope.linkreq   = response.data[0].link_request.length;
+    $scope.Pid       = response.data[1]._id;
+    $scope.linkreq   = response.data[1].link_request.length;
     
 /* This reuest is for graph while checking Reports */  
     $http({
@@ -75,8 +75,13 @@ $http({
     url: 'http://localhost:8081/status/' + $scope.Pid,
    })
    .then(function(response){
-        $scope.pending  = response.data;
-        $scope._pending = response.data.length + $scope.linkreq; 
+        $scope.pending       = response.data;
+        $scope._pending_link = $scope.linkreq;
+        $scope._pending      = response.data.length ; 
+        
+        if($scope._pending_link != 0)
+           $scope.flag_link = true;
+        
         if($scope._pending != 0)
           $scope.flag = true;
    });
@@ -110,10 +115,10 @@ $http({
 
 
 /* This function is used for Upload Reports  */
-$scope.uploadRepo = function(id, title, type, url){
+$scope.uploadRepo = function(title, type, url){
      $http({
        method : 'POST',
-       url    : 'http://localhost:8081/newRepo/'+id+'/'+title+'/'+type+'/'+url,
+       url    : 'http://localhost:8081/newRepo/'+$scope.Pid+'/'+title+'/'+type+'/'+url,
      }).then(function(response){
      	$scope.Reports = response.data;
      });

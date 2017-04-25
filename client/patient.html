@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 	<link rel="stylesheet" type="text/css" href="css/patient_style.css"/>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js"></script>
@@ -34,7 +35,37 @@
                </div>
                     <ul class=" my-icon nav navbar-nav navbar-right" ng-controller='dashboard'>
              	       <li ><abbr class="abrt" title="Upload Report"><a class=" button" id="cmp"  data-toggle="modal" data-target="#myModal"><img class="upicon" src="img\upicon.jpg"></a></abbr></li>
-             	      
+<!-- *******************************************************************************************************************-->
+                     <li>
+                         <a class="dropdown-toggle" data-toggle="dropdown">
+                           <img class="reqst avatar " style="width: 23px; height: 23px;" src="img\link.jpg">
+                          <button class="Nbtn" ng-show="flag_link">
+                            <p class="NbtnH" >{{_pending_link}}</p>
+                          </button>
+                        </a>
+
+                       <ul class="dropdown-menu" style="width: 500px; height: 500px; overflow-y: scroll;">
+                        <h3 class="link_re_head">Link Requests</h3>
+                        <li>
+                          <div ng-repeat=" req in myWelcome.link_request">
+                            <div class="row link_re_bod">
+                              <div class="col-sm-8">
+                               <p>
+                                  <b>{{req.name}}</b>, has sent you a Request .<br>Do you want
+                                  to link Your Account.  
+                               </p>
+                             </div>
+                              <div class="col-sm-4">
+                                  <button class="btn btn-primary link_re_btte1" ng-click="AddReport(pend._id)">Confirm</button>
+                                    <button class="btn btn-primary link_re_btte2" ng-click="delReport(pend._id)">Reject</button>
+                              </div>
+                          </div>
+                         </div>
+                       </li>
+                      </ul>     
+                    </li>             	      
+
+
 
 <!-- ********************** Pending request dropDown here with count of pending requests ***************************** --> 
                      <li>
@@ -70,26 +101,6 @@
                                </tr>
                               </tbody>
                             </table>
-
-                          
-                          <div ng-repeat=" req in myWelcome.link_request">
-                            <div class="row link_re_bod">
-                              <div class="col-sm-8">
-                               <p>
-                                  <b>{{req.name}}</b>, has sent you a Request .<br>Do you want
-                                  to link Your Account.  
-                               </p>
-                             </div>
-                              <div class="col-sm-4">
-                                  <button class="btn btn-primary link_re_btte1" ng-click="AddReport(pend._id)">Confirm</button>
-                                    <button class="btn btn-primary link_re_btte2" ng-click="delReport(pend._id)">Reject</button>
-                              </div>
-                          </div>
-                        </div>
-
-
-
-
                         </ul>
                     </li> 
 <!-- ***************************************************************************************************************** -->                    
@@ -175,7 +186,7 @@
                           <!--<input type="file" name="" ng-model="filepath">-->
                          <br>
                          <div class="upload-button">
-                               <button class="btn  upload-form-button1" ng-click="uploadRepo(Pid, title, type, url)"        ng-disabled="(!(title) || !(type))" data-dismiss="modal">Submit
+                               <button class="btn  upload-form-button1" ng-click="uploadRepo(title, type, url)"        ng-disabled="(!(title) || !(type))" data-dismiss="modal">Submit
                                </button>
                         </div>
                       </div>
