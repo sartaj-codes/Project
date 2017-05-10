@@ -16,8 +16,8 @@ $http({
     url: 'http://localhost:8081/infor'
    })
    .then(function(response){
-    $scope.Pid       = response.data[1]._id;
-    $scope.linkreq   = response.data[1].link_request.length;
+    $scope.Pid       = response.data[0]._id;
+    $scope.linkreq   = response.data[0].link_request.length;
     
 /* This reuest is for graph while checking Reports */  
     $http({

@@ -82,8 +82,8 @@ var patientSchema = new Schema({
 		type:String
 	},
 
-	link_request :{    id   : {type: String, },
-		             name : {type : String, }
+	link_request :{    id   : {type: String, required: true, unique : true},
+		             name : {type : String,  }
 	                },
 	/*lname:{
 		type: String,
@@ -181,7 +181,7 @@ module.exports.getInfo = function(callback){
 
 module.exports.sendRequest = function(sender, id, name, callback){
 	patient.update({"_id"   : id},
-		           {"$push" : 
+		           {"$addToSet" : 
 		              {
 		              	 "link_request" :
 		              	   {
@@ -195,4 +195,16 @@ module.exports.sendRequest = function(sender, id, name, callback){
                     	else
                     		return callback(doc,true);
                     });
+};
+
+module.exports.rejectReq = function(user, id, callback){
+	patient.update(  { "_id" : user}, 
+		             { $pull : {"link_request" :{ "id" : id} }},
+	                // { multi : true}, 
+	                  function(err, doc){
+                        if (err)
+                          return callback(err, false);
+                        else
+                          return callback(doc, true);              
+	                 });
 };

@@ -7,9 +7,9 @@ app.controller('myCtrl',['$scope', '$http' , function($scope, $http){
    	url: 'http://localhost:8081/infor'
    })
    .then(function(response){
-   	$scope.myWelcome = response.data[1];
-    $scope.Pid       = response.data[1]._id;
-    $scope.url       = response.data[1].secure_url;
+   	$scope.myWelcome = response.data[0];
+    $scope.Pid       = response.data[0]._id;
+    $scope.url       = response.data[0].secure_url;
      $http({
     method : 'GET',
     url: 'http://localhost:8081/repos/'+ $scope.Pid, 
@@ -23,7 +23,7 @@ app.controller('myCtrl',['$scope', '$http' , function($scope, $http){
 $scope.linkAccount = function(sender, owner, name){
   $http({
     method : 'POST',
-      url    :  'http://localhost:8081/linkRequest/'+sender+'/'+ owner + '/' + name,
+    url    :  'http://localhost:8081/linkRequest/'+sender+'/'+ owner + '/' + name,
   })
      .then(function(response){
              $scope.myWelcome = response.data;
@@ -32,9 +32,15 @@ $scope.linkAccount = function(sender, owner, name){
   
 };
 
-
-
-
+$scope.rejectReq = function(user, _id){
+ $http({
+    method : "POST",
+    url    : 'http://localhost:8081/rejectReq/'+user+'/'+_id,
+ })
+   .then(function(response){
+      $scope.myWel = response.data;
+   });
+};
 
 }]);
   

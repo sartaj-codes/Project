@@ -137,6 +137,19 @@ app.post('/linkRequest/:_sender/:_id/:_name', function(req,res){
 
 });
 
+/* This Route is for refusing link account request */
+app.post('/rejectReq/:_login/:_id', function(req,res){
+   var id  = req.params._id;
+   var usr = req.params._login;
+   P_detail.rejectReq(usr, id, function(err,doc){
+   	   if(err)
+   	   	  res.json(err);
+   	   	else
+   	   	   res.json(doc);
+   });
+
+});
+
 /*********************************************************************************************************************/
 
 /******************************* Below all are Reports related Routes ***********************************************/
