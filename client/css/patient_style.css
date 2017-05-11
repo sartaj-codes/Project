@@ -39,7 +39,6 @@ background: #4c4d4c;
     top: 98px;
     padding-bottom: 15%;
     position: fixed;
-    overflow-y: scroll;
     list-style-type: none;
 }
 .lrow-bar a.active{

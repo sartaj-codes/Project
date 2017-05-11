@@ -87,6 +87,7 @@ $http({
    });
 
 
+
 /* This function is used for delete Reports that are shown in notification */
  $scope.delReport = function(id){
    	  
@@ -167,5 +168,52 @@ $scope.AddReport = function(id){
 
 });
 
+
+
+/* This function is for reject Link request */
+$scope.rejectReq = function(user, _id){
+ $http({
+    method : "POST",
+    url    : 'http://localhost:8081/rejectReq/'+user+'/'+_id,
+ })
+   .then(function(response){
+
+  /* for instant change these call are excuted */
+  /* -------------------------------------*/      
+       $http({
+         method : 'GET',
+         url: 'http://localhost:8081/infor'
+      })
+   .then(function(response){
+       $scope.myWelcome = response.data[0];  // update user detail
+       $scope.linkreq   = response.data[0].link_request.length; // update linking request
+   });
+  /*--------------------------------------*/
+
+/*-----------------------------------------*/
+  $http({
+    method : 'GET',
+    url: 'http://localhost:8081/status/' + $scope.Pid,
+   })
+   .then(function(response){
+        $scope.pending       = response.data;
+        $scope._pending_link = $scope.linkreq; // upadte size of linking account requests
+        $scope._pending      = response.data.length ; //update reports requests
+        
+        /* flag used for indication */
+        if($scope._pending_link != 0)
+           $scope.flag_link = true;
+        else
+          $scope.flag_link = false;
+
+        if($scope._pending != 0)
+          $scope.flag = true;
+        else
+          $scope.flag = false;
+   });
+  /*----------------------------------------*/
+ });
+
+};
 
 }]);

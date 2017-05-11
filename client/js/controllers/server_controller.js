@@ -26,21 +26,12 @@ $scope.linkAccount = function(sender, owner, name){
     url    :  'http://localhost:8081/linkRequest/'+sender+'/'+ owner + '/' + name,
   })
      .then(function(response){
-             $scope.myWelcome = response.data;
+            // $scope.myWelcome = response.data;
 
      });
   
 };
 
-$scope.rejectReq = function(user, _id){
- $http({
-    method : "POST",
-    url    : 'http://localhost:8081/rejectReq/'+user+'/'+_id,
- })
-   .then(function(response){
-      $scope.myWel = response.data;
-   });
-};
 
 }]);
   
