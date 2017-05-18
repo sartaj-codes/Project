@@ -165,7 +165,7 @@
                    <h4 class="modal-title" style="text-align: center;">Upload Report</h4>
                 </div>
                 <div class="modal-body" ng-controller='dashboard'>
-                  <form class="upload-form" name="upfrm" >
+                  <form class="upload-form" name="upfrm" action="http://localhost:8081/upReport" method="POST" enctype="multipart/form-data" >
                       <div class="form-inline">
                           <input type="text" name = "id" ng-model="Pid" style="display: none;" >
                           <input type="text" name = "url" ng-model="url" style="display: none;">
@@ -177,16 +177,17 @@
                           " ng-model="type" /><br>
                           <textarea class="form-control" id="upload-form-ta" placeholder="Add an optional extended description..."></textarea>
                           <br>  
-                         <input  class="form-control" placeholder="Choose Report .." id="upload-f" disabled="disabled"/>
+                         <!--<input  class="form-control" placeholder="Choose Report .." id="upload-f" disabled="disabled"/>
                           <div class="fileUpload btn upload-form-button" >
                               <span><strong>Add</strong></span>
                               <input id="uploadBtn" type="file" class="upload" />
                          </div>
-                        
-                          <!--<input type="file" name="" ng-model="filepath">-->
+                          data-dismiss = "modal"
+                          -->
+                          <input type="file" name="file" ng-model="filepath">
                          <br>
-                         <div class="upload-button">
-                               <button class="btn  upload-form-button1" ng-click="uploadRepo(title, type, url)"        ng-disabled="(!(title) || !(type))" data-dismiss="modal">Submit
+                         <div class="upload-button9">
+                               <button class="btn  upload-form-button1" ng-disabled="(!(title) || !(type) || !(filepath))"  type="submit">Submit
                                </button>
                         </div>
                       </div>

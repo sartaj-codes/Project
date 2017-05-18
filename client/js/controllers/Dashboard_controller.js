@@ -27,7 +27,9 @@ $http({
    .then(function(response){
 
      /* Here am getting Response going to create array accoording to graph format */
-   	   $scope.Reports = response.data;
+   	$scope.Reports = response.data;
+    if(response.data.length != 0)
+    {  
    	   var _date      = response.data[0].date;
    	   var start_date = (parseInt(10*_date[8])+parseInt(_date[9]));
    	   var length     = response.data.length; 
@@ -65,6 +67,8 @@ $http({
    	 cal     += _y; 
    	 $scope._total = cal;
    	 $scope.data.push(temp);
+   }
+     
   });
 
 

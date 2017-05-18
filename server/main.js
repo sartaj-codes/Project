@@ -94,7 +94,7 @@ app.post('/changeAProfile', function(req,res){
     });
 });  
 
-/* This route is for upload an image and using Cloud to handeled Images */
+/* This route is for upload an image and using Cloud to handle Images */
 app.post('/up', function(req,res){
    var file = req.files.file.path;
     console.log(file);
@@ -155,7 +155,7 @@ app.post('/rejectReq/:_login/:_id', function(req,res){
 /******************************* Below all are Reports related Routes ***********************************************/
 
 /* This route is for adding report by using user Credentials to Database */
-app.post('/newRepo/:id/:title/:type/https://res.cloudinary.com/medcare/image/upload/:ty1/:ty2',function(req,res){
+/*app.post('/newRepo/:id/:title/:type/https://res.cloudinary.com/medcare/image/upload/:ty1/:ty2',function(req,res){
   var id    = req.params.id;
   var title = req.params.title;
   var type  = req.params.type;
@@ -169,7 +169,7 @@ app.post('/newRepo/:id/:title/:type/https://res.cloudinary.com/medcare/image/upl
 	});
 	  
 });
-
+*/
 
 /* Seprate Route not for users for admin to check all reports in database */
 app.get('/ALLrepos', function(req,res){
@@ -241,12 +241,24 @@ app.delete('/delrepos/:data', function(req,res){
 });
 
 /* File uploading route here */
-app.post('/upReportFile/:path', function(req,res){
+app.post('/upReport', function(req,res){
+   var id    = req.body.id;
+   var title = req.body.title;
+   var type  = req.body.type;	
+   var url   = req.body.url;
+   console.log(id);
    var file = req.files.file.path;
     cloudinary.uploader.upload(file, function(result) { 
      console.log(result);
-     {public_id: 'single_page_pdf'};
-     res.json(result.secure_url);
+     var url_2 = result.secure_url;
+     {public_id: 'Report.pdf'};
+     //res.json(result.secure_url);
+     R_Detail.addReport(id, title, type, url, url_2, function(err,doc){
+       if(err)
+         res.json(err);
+       else
+        res.json(doc);
+      });
    });
 });
 /*********************************************************************************************************************/

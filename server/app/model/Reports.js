@@ -27,7 +27,12 @@ var ReportSchema = new Schema({
 		 required : true
 	},
 	secure_url:{
-		type :String
+		type     : String,
+		required : true
+	},
+	report_url:{
+		type    : String,
+		required : true
 	}
 }); 
 
@@ -51,7 +56,7 @@ module.exports.gStatus = function(id, callback){
    	reports.find({ $and : [ {"Owner" : id}, {"Status" :"P" } ] },callback);
    };
 
-module.exports.addReport = function(_id,_title, _type, url, callback){
+module.exports.addReport = function(_id,_title, _type, url, url_2, callback){
 	var id = _id.toString();
 	new reports({
 		    title     : _title,
@@ -60,7 +65,8 @@ module.exports.addReport = function(_id,_title, _type, url, callback){
 		    Status    : "P",
 		    Sender    : id,
 		    Owner     : id,
-		    secure_url: url
+		    secure_url: url,
+		    report_url: url_2
 	}).save(function(err,doc){
 		if(err)
 			return callback(err);
@@ -92,3 +98,14 @@ module.exports.delRepo = function(id,callback){
  	              });
     };
 
+module.exports.addLink = function(id, url, callback){
+
+	reports.update({"Owner" : id},
+		            {$set: {"report_url" : url}},
+		             function(err,doc){
+		             	if(err)
+		             		return callback(err);
+		             	else
+		             		return callback(doc);
+		             });
+};
