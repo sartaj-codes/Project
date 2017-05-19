@@ -174,8 +174,10 @@ $scope.AddReport = function(id){
 
 
 
-/* This function is for reject Link request */
-$scope.rejectReq = function(user, _id){
+/*---------------------------- This function is for reject Link request -------------------------------------------*/
+$scope.rejectReq = function(user, _id)
+{
+
  $http({
     method : "POST",
     url    : 'http://localhost:8081/rejectReq/'+user+'/'+_id,
@@ -194,7 +196,7 @@ $scope.rejectReq = function(user, _id){
    });
   /*--------------------------------------*/
 
-/*-----------------------------------------*/
+  /*-----------------------------------------*/
   $http({
     method : 'GET',
     url: 'http://localhost:8081/status/' + $scope.Pid,
@@ -219,5 +221,39 @@ $scope.rejectReq = function(user, _id){
  });
 
 };
+/*--------------------------------------------------------------------------------------------------*/
+$scope.acceptUser = function(user, _id, name)
+{  
+   $http({
+          method : 'GET',
+          url    : 'http://localhost:8081/getUrl/'+ _id,  
+      })
+      .then(function(url){
+         $scope.url = url.data[0].secure_url;
+        
+      });
+    
+  
+  $http({
+       method : 'GET',
+       url    : 'http://localhost:8081/repos/' + _id,
+   })
+   .then(function(response){
+      
+      $scope._leng = response.data.length;
+      
+      $http({
+      method : 'POST',
+      url    : 'http://localhost:8081/accept/'+ user +'/'+ _id +'/'+ name +'/'+$scope._leng+'/' + $scope.url, 
+    })
+    .then(function(res){
+      
+    });
+  }); 
+   $scope.rejectReq(user, _id);
+};
+
+
+
 
 }]);

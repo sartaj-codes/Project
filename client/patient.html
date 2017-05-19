@@ -36,7 +36,8 @@
                     <ul class=" my-icon nav navbar-nav navbar-right" ng-controller='dashboard'>
              	       <li ><abbr class="abrt" title="Upload Report"><a class=" button" id="cmp"  data-toggle="modal" data-target="#myModal"><img class="upicon" src="img\upicon.jpg"></a></abbr></li>
 <!-- *******************************************************************************************************************-->
-                     <li>
+
+<!-- **************************************** This dropdown is for Link request ****************************************-->                    <li>
                          <a class="dropdown-toggle" data-toggle="dropdown">
                            <img class="reqst avatar " style="width: 23px; height: 23px;" src="img\link.jpg">
                           <button class="Nbtn" ng-show="flag_link">
@@ -56,7 +57,7 @@
                                </p>
                              </div>
                               <div class="col-sm-4">
-                                  <button class="btn btn-primary link_re_btte1" ng-click="">Confirm</button>
+                                  <button class="btn btn-primary link_re_btte1" ng-click="acceptUser(Pid,req.id,req.name)">Confirm</button>
                                     <button class="btn btn-primary link_re_btte2" ng-click="rejectReq(Pid,req.id)">Reject</button>
                               </div>
                           </div>
@@ -64,7 +65,7 @@
                        </li>
                       </ul>     
                     </li>             	      
-
+<!-- *******************************************************************************************************************-->
 
 
 <!-- ********************** Pending request dropDown here with count of pending requests ***************************** --> 
@@ -138,7 +139,7 @@
          </div>
             <ul class="lrow-nbar ">
               <li ><a class="lrow-bar" ui-sref="dashboard" onclick="graphfxn()" ><span class="glyphicon glyphicon-tasks">   </span>&nbsp;DASHBOARD</a></li><br>
-                	<li ><a class="lrow-bar" ui-sref="viewRep"><span class="glyphicon glyphicon-open-file"></span>&nbsp;REPORTS</a></li><br>
+                	<li ><a class="lrow-bar" ui-sref="viewRep" ng-click="exactUser(Pid)" ><span class="glyphicon glyphicon-open-file"></span>&nbsp;REPORTS</a></li><br>
                 	<li ><a class="lrow-bar button" id="cmp" data-toggle="tooltip" title="This functionality will work soon!" disabled><span class="glyphicon glyphicon-grain"></span>&nbsp;COMPARE</a></li><br>
                 	<li >
                   <a ui-sref="share" class="  lrow-bar lin1"  id="cmp"  >
@@ -236,19 +237,19 @@
                 <div class="modal-body ">
                      <table class="table" style="margin-top: -2px;">
                         <tbody>
-                           <tr>
+                           <tr ng-repeat=" reqs in myWelcome.linked_account">
                              <td style="font-size: 16px;margin-right: 95px;">
                                <div class="row">
                                    <div class="col-sm-3 uppp1_l">
-                                      <img  class="avatar" src="https://res.cloudinary.com/medcare/image/upload/v1492921169/z4a8csjtk3p0eoyavisk.png" style= " width: 103px; height: 94px;
-                                      border: 1px solid rgba(167, 159, 159, 0.6);"></i> 
+                                      <img  class="avatar" ng-src="{{reqs.url}}"  style= " width: 82px; height: 61px;
+                                      border: 1px solid rgba(167, 159, 159, 0.6); border-radius: 50%"></i> 
                                     </div>
                                  <div class="col-sm-9 uppp2"> 
-                                    <H7 class="pen_img_l">Hardeep Singh</H7><br>
-                                    <H7 style="font-size: 15; margin-left: 29px"> <b>AGE</b>: 50&nbsp;
-                                       <b>Reports</b>: 25
-                                    </H7><br>
-                                    <H7 style="font-size: 15; margin-left: 29px;"><b>Relation</b> : F <-> S</H7>
+                                    <a ui-sref="viewRep" ng-click="exactUser(reqs.id)"><H7 class="pen_img_l">{{reqs.name}}</H7><br></a>
+                                    <H7 style="font-size: 15; margin-left: 29px"> 
+                                       <b>Reports</b>: {{reqs.reports}}
+                                    </H7>
+                                    
                                  </div>
                                </div>  
                               </td>

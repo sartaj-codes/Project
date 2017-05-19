@@ -33,6 +33,21 @@ $scope.linkAccount = function(sender, owner, name){
 };
 
 
+
+/*------------------------------This function is for access another user Reports --------------------------------------*/
+$scope.exactUser = function(id)
+{
+   $http({
+      method : 'GET',
+      url    : 'http://localhost:8081/repos/'+ id,
+   })
+   .then(function(response){
+      $scope.Reports = response.data;
+   });
+};
+
+
+
 }]);
   
 

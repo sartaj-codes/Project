@@ -82,9 +82,14 @@ var patientSchema = new Schema({
 		type:String
 	},
 
-	link_request :{    id   : {type: String, required: true, unique : true},
-		             name : {type : String,  }
+	link_request   :{ id     : {type: String, required: true, unique : true},
+		              name   : {type : String}
 	                },
+	linked_account :{ id       :   {type : String, required: true, unique : true},
+	                  name     :   {type : String},
+	                  reports  :   {type : Number},
+	                  url      :   {type : String}
+	                 }                
 	/*lname:{
 		type: String,
 		required: true,
@@ -200,6 +205,45 @@ module.exports.sendRequest = function(sender, id, name, callback){
 module.exports.rejectReq = function(user, id, callback){
 	patient.update(  { "_id" : user}, 
 		             { $pull : {"link_request" :{ "id" : id} }},
+	                // { multi : true}, 
+	                  function(err, doc){
+                        if (err)
+                          return callback(err, false);
+                        else
+                          return callback(doc, true);              
+	                 });
+};
+
+
+
+module.exports.gotta = function(id ,callback){
+   patient.find({"_id" : id}, {secure_url : 1}, callback );
+};
+
+
+module.exports.acceptUser = function(user, id, name, len, url, callback){
+	patient.update({"_id" : user },
+		           {"$addToSet" :
+		              {
+		              	 "linked_account" :
+		              	   {
+		              	   	 "id"     :  id,
+		              	   	 "name"   : name,
+		              	   	 "reports": len,
+		              	   	 "url"    : url
+		              	   }
+		               }
+		            }, function(err,doc){
+		            	if(err)
+		            		return callback(err,false);
+		            	else
+		            		return callback(doc,true);
+		            });
+};
+
+module.exports.removeUser = function(user, id, callback){
+	patient.update(  { "_id" : user}, 
+		             { $pull : {"linked_account" :{ "id" : id} }},
 	                // { multi : true}, 
 	                  function(err, doc){
                         if (err)

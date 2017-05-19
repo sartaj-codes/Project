@@ -150,6 +150,47 @@ app.post('/rejectReq/:_login/:_id', function(req,res){
 
 });
 
+app.post('/remUser/:_login/:_id', function(req,res){
+   var id  = req.params._id;
+   var usr = req.params._login;
+   P_detail.removeUser(usr, id, function(err,doc){
+       if(err)
+          res.json(err);
+        else
+           res.json(doc);
+   });
+
+});
+
+app.get('/getUrl/:_id', function(req,res){
+  var id = req.params._id;
+  P_detail.gotta(id, function(err,doc){
+    if(err)
+      res.json(err);
+    else
+      res.json(doc);
+  });
+});
+
+
+
+/*This Route is for adding linkUser*/
+app.post('/accept/:_user/:_id/:_name/:_len/https://res.cloudinary.com/medcare/image/upload/:ty1/:ty2', function(req,res){
+ var user = req.params._user;
+ var id   = req.params._id;
+ var name = req.params._name;
+ var len  = req.params._len;
+ var url  = "https://res.cloudinary.com/medcare/image/upload/"+req.params.ty1+"/"+req.params.ty2;
+ P_detail.acceptUser(user,id,name,len,url, function(err,doc){
+    if(err)
+      res.json(err);
+    else
+      res.json(err);
+  });
+});
+
+
+
 /*********************************************************************************************************************/
 
 /******************************* Below all are Reports related Routes ***********************************************/
