@@ -287,14 +287,12 @@ app.post('/upReport', function(req,res){
    var title = req.body.title;
    var type  = req.body.type;	
    var url   = req.body.url;
-   console.log(id);
    var file = req.files.file.path;
     cloudinary.uploader.upload(file, function(result) { 
-     console.log(result);
      var url_2 = result.secure_url;
+     var url_3 = url_2.substr(0, url_2.length -4) + ".png";
      {public_id: 'Report.pdf'};
-     //res.json(result.secure_url);
-     R_Detail.addReport(id, title, type, url, url_2, function(err,doc){
+     R_Detail.addReport(id, title, type, url, url_2,url_3, function(err,doc){
        if(err)
          res.json(err);
        else
@@ -302,6 +300,41 @@ app.post('/upReport', function(req,res){
       });
    });
 });
+
+/*Send Report route here */
+/*app.post('/upRepShare', function(req,res){
+   var id    = req.body.id;
+   var title = req.body.title;
+   var type  = req.body.type; 
+   var url   = req.body.url;
+   var url_2 = req.body.url_2;
+   var url_3 = req.body.url_3;
+   R_Detail.addReport(id, title, type, url, url_2,url_3, function(err,doc){
+       if(err)
+         res.json(err);
+       else
+        res.json(doc);
+      });
+  
+});
+*/
+
+
+
+/*  This route is for add any attribute in schema of all reports*/
+/*app.post('/linkka/:_id/https://res.cloudinary.com/medcare/image/upload/:ty1/:ty2', function(req,res){
+  var id     = req.params._id;
+  var url_1  = "https://res.cloudinary.com/medcare/image/upload/"+req.params.ty1+"/"+req.params.ty2; 
+  var url    =  url_1.substr(0,(url_1.length-4)) +".png";
+  R_Detail.linkka(id, url, function(err, doc){
+      if(err)
+        res.json(err);
+      else
+        res.json(doc);
+  });
+
+});
+*/
 /*********************************************************************************************************************/
 
 /********* Server Running on 8081 Port ********/

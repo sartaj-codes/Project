@@ -57,20 +57,43 @@
     <div class="table-responsive"  style="margin-top: 10px">
             <table class="table" style="margin-top: -2px;">
               <tbody ng-repeat="reps in Reports">
-                <tr>
-                  <td><i class="fa fa-file-text-o" style="font-size:24px ;margin-right:10px;"></i>{{reps.title}}</td>
-                 
-                  <td class=""> <a href="{{reps.report_url}}" target="_blank" data-toggle="tooltip" title=" {{reps.date}}" disabled>{{reps.type}}</a></td>
-                  
+                <tr class="row">
+                  <td>
+                  <div class="col-md-4">
+                     <img ng-src="{{reps.png_url}}" style="height:150px; width : 200px; border: 1px solid rgba(128, 128, 128, 0.53); margin-left: 87px;">
+                  </div>
+                  <div ng-controller="dashboard" class="col-md-7" style="font-family: century; margin-top: -29px;">
+                     <h1>{{reps.title}}</h1>
+                     <h3 style="margin-top: 0px; margin-left: 18px">{{reps.type}}</h3>
+                     <h4 style="margin-left: 18px; ">{{reps.date}}</h4>
+                     <a href="{{reps.report_url}}" target="_blank" class="btn btn-primary penHB1_x" >View Report</a>
+                     <button class="btn btn-primary penHB2_x" ng-click="delReport(reps._id)">Delete Report</button>
+                  </div>
+                  <div class="col-md-1" >
+                    <button type="button" class="btn btn-default btn-sm" style="margin-top: 18px;" data-toggle="dropdown">
+                      <span class="glyphicon glyphicon-share-alt"></span> Share
+                    </button>
+                    
+                    <ul class="dropdown-menu dropdown-menu sendaR">
+                       <li>
+                        <form class="form-inline ">
+                          <div class="form-group ">
+                             <h4 style="margin-top: 13px; margin-left: 10px; border-bottom: 1px solid rgba(128, 128, 128, 0.23);">Send Report</h4>
+                             <input type="text" class="form-control" style="margin-left: 14px; width: 257px; border-radius: inherit;" ng-model="Pname" placeholder="Add sender username.. " />
+                             <button class="btn btn-primary" id="bttcl" ng-click="findUser()" ng-disabled ="!Pname">Send</button>
+                          </div>
+                       </form>
+                      </li>
+                    </ul>
+                  </div>
+                </td>
+              </tr>
          </tbody>
     </table>
     </div>
   </div>  
-                    <script>
-                      $(document).ready(function(){
-                      $('[data-toggle="tooltip"]').tooltip();   
-                      });
-                    </script>
+                   
+
                     
                     
 </body>

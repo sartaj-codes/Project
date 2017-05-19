@@ -39,7 +39,7 @@
 
 <!-- **************************************** This dropdown is for Link request ****************************************-->                    <li>
                          <a class="dropdown-toggle" data-toggle="dropdown">
-                           <img class="reqst avatar " style="width: 23px; height: 23px;" src="img\link.jpg">
+                           <img class="reqst avatar " style="width: 23px; height: 23px;" src="img\link1.jpg">
                           <button class="Nbtn" ng-show="flag_link">
                             <p class="NbtnH" >{{_pending_link}}</p>
                           </button>
@@ -241,15 +241,15 @@
                              <td style="font-size: 16px;margin-right: 95px;">
                                <div class="row">
                                    <div class="col-sm-3 uppp1_l">
-                                      <img  class="avatar" ng-src="{{reqs.url}}"  style= " width: 82px; height: 61px;
+                                      <img  class="avatar" ng-src="{{reqs.url}}"  style= " width: 75px; height: 46px;
                                       border: 1px solid rgba(167, 159, 159, 0.6); border-radius: 50%"></i> 
                                     </div>
                                  <div class="col-sm-9 uppp2"> 
                                     <a ui-sref="viewRep" ng-click="exactUser(reqs.id)"><H7 class="pen_img_l">{{reqs.name}}</H7><br></a>
-                                    <H7 style="font-size: 15; margin-left: 29px"> 
+                                   <!-- <H7 style="font-size: 15; margin-left: 29px"> 
                                        <b>Reports</b>: {{reqs.reports}}
                                     </H7>
-                                    
+                                    -->
                                  </div>
                                </div>  
                               </td>
@@ -289,16 +289,10 @@
                </div>
         </div>
 </div>-->
-                 <script >
-                    function myFunction() 
-                       {
-                         var x = document.getElementById("Demo");
-                         
-                          document.getElementById("uploadBtn").onclick = function () {
-                          document.getElementById("upload-f").value = this.value;
-                            }
-                        }    
-                     </script> 
-                
+ <script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip(); 
+});
+</script>
 </body> 
 </html>

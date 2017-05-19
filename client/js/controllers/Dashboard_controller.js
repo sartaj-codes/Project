@@ -254,6 +254,30 @@ $scope.acceptUser = function(user, _id, name)
 };
 
 
+/* Keep this fxn for when need to add new attribute */
+/*
+$scope.linkkaPng = function()
+{
+    $http({
+      method : 'GET',
+      url    : 'http://localhost:8081/ALLrepos',
+    })
+    .then(function(response){
+        for(var i = 0; i < response.data.length; i++)
+        {
+
+            $http({
+               method : 'POST',
+               url    : 'http://localhost:8081/linkka/'+response.data[i]._id +'/'+ response.data[i].report_url
+            })
+            .then(function(res){
+
+            });
+        }  
+    });
+};
+
+*/
 
 
 }]);

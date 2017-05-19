@@ -19,7 +19,7 @@
     max-width: 31px;
     max-height: 12px;
     background: transparent;
-    margin-top: -45px;
+    margin-top: -39px;
     margin-left: 85%;
 }
 .dr-l{
@@ -549,8 +549,9 @@ abbr[data-original-title], abbr[title] {
     border-radius: 3px;
     padding: 1px;
 }
-a{
+a:hover{
   cursor:pointer;
+  text-decoration: none;
 }
 .upmodal{
     width: 62%;
@@ -597,8 +598,9 @@ a{
 
 }
 .pen_img_l{
-  font-size: 18px;
-    margin-left: 17px;
+  font-size: 17px;
+    margin-left: 20px;
+    font-family: century gothic;
     font-weight: bold;
     color: rgba(68, 66, 66, 0.91);
 }
@@ -629,5 +631,42 @@ a{
     margin-bottom: 19px;
     margin-top: 12px;
     margin-left: 4px;
+    font-weight: 700;
+    font-size: 16px;
+}
+.penHB2_x{
+  width: 120px;
+    font-size: 12px;
+    margin-top: 4px;
+    font-weight: 700;
+    margin-left: 2px;
+    background-color: rgba(128, 128, 128, 0.18);
+    color: rgba(169, 27, 17, 0.78);
+    border: none;
+    border-bottom: 2px solid rgba(128, 128, 128, 0.11);
+    border-radius: 3px;
+    padding: 1px;
+    font-family: sans-serif;
+
+
+}
+.penHB1_x{
+  width: 92px;
+    font-size: 12px;
+    margin-top: 4px;
+    margin-left: 18px;
+    background-color: rgba(0, 128, 0, 0.82);
+    font-weight: 700;
+    border-radius: 3px;
+    border-bottom: 2px solid rgba(128, 128, 128, 0.4);
+    padding: 1px;
+    font-family: sans-serif;
+
+}
+.sendaR{
+ margin-left: -343px;
+    margin-top: -54px;
+    height: 113px;
+    width: 357px;
 
 }
