@@ -1,55 +1,5 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-/*var bcrypt   = require('bcrypt-nodejs');
-var validate = require('mongoose-validator');
-
-var nameValidator=[
-  validate({
-    validator: 'matches',
-    arguments: /^([a-zA-Z])+$/,
-    message: 'Numbers and special characters are not allowed.'
-  })
-];
-
-var emailValidator=[
-  validate({
-    validator: 'isEmail',
-    message: 'Invalid email id.'
-  })
-];
-
-var phoneValidator=[
-  validate({
-  	validator: 'isLength',
-  	arguments: [10,10],
-  	message: 'Invalid phone number.'
-	}),
-	validate({
-		validator: 'isInt',
-		message: 'Invalid phone number'
-	})
-];
-
-var usernameValidator=[
-  validate({
-    validator:'isAlphanumeric',
-    message:'Username should contain only letters and numbers'
-  }),
-  validate({
-  	validator: 'isLength',
-  	arguments: [4,],
-  	message:'Username should be atleast 4 characters long.'
-  })
-];
-
-var passwordValidator=[
-  validate({
-  	validator: 'isLength',
-  	arguments: [6,50],
-  	message: 'Password should be between {ARGS[0]} and {ARGS[1]} characters'
-	})
-];
-*/
 var patientSchema = new Schema({
 	name:{
 		type: String,
@@ -105,9 +55,10 @@ var patientSchema = new Schema({
 	
 });
 
-
+/*------------ It's model name(Collection name also :- patients i.e stored mongoDB database) ------------------------*/
 var patient = mongoose.model('patients', patientSchema);
 
+/*-----------This function is for adding new user --------------------------------*/
 module.exports.addUserP = function(callback){
 new patient ({
 	     name       : "Virat Kohli",
@@ -125,11 +76,14 @@ new patient ({
 
 };
 
+
+/*---------------- Below all functions are for data Mainpulation in pateints database -------------------------------*/ 
 module.exports.showUsers = function(name, callback){
 	
 	patient.find({"name" : name}, {name : 1, secure_url : 1},  callback);
 };
 
+/*---------------  Detele user -------------------------*/
 module.exports.delUserP = function(id, callback){
 	patient.remove({"_id" : id}, function(err,doc){
        if(err)
@@ -141,7 +95,7 @@ module.exports.delUserP = function(id, callback){
 };
 
 
-
+/*-----------------Update detail --------------------------*/
 module.exports.updateUserP = function(id,first,em,bir, callback){
 	 patient.update({"_id" : id},
    	            {$set:{"name" : first,
@@ -170,6 +124,9 @@ module.exports.updateUserA = function(id, username,password, callback){
    	            		return callback(doc);
    	            });
 };
+/*------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------Adding Image function here ------------------------------------------------------------*/
 module.exports.addImageUrl = function(id,url,callback){
 	patient.update({"_id" : id},
 		         {$set: {"secure_url": url}},function(err,doc){
@@ -184,6 +141,12 @@ module.exports.getInfo = function(callback){
 	patient.find({},callback);
 };
 
+module.exports.getPrepou = function(_name, callback){
+	patient.find({"name" : _name},callback);
+};
+/*--------------------------------------------------------------------------------------------------------------*/
+
+/*------------------- Linking Account process is below --------------------------------------------------------*/
 module.exports.sendRequest = function(sender, id, name, callback){
 	patient.update({"_id"   : id},
 		           {"$addToSet" : 
@@ -220,7 +183,7 @@ module.exports.gotta = function(id ,callback){
    patient.find({"_id" : id}, {secure_url : 1}, callback );
 };
 
-
+/*------------------------------Accepting request -----------------------------------------*/
 module.exports.acceptUser = function(user, id, name, len, url, callback){
 	patient.update({"_id" : user },
 		           {"$addToSet" :
@@ -241,6 +204,7 @@ module.exports.acceptUser = function(user, id, name, len, url, callback){
 		            });
 };
 
+/*-------------------------------   Remove user ----------------------------------------------------*/
 module.exports.removeUser = function(user, id, callback){
 	patient.update(  { "_id" : user}, 
 		             { $pull : {"linked_account" :{ "id" : id} }},
@@ -252,3 +216,4 @@ module.exports.removeUser = function(user, id, callback){
                           return callback(doc, true);              
 	                 });
 };
+/*------------------------------------ PATEINT.JS --------------------------------------------------*/

@@ -60,6 +60,10 @@ module.exports.gStatus = function(id, callback){
    	reports.find({ $and : [ {"Owner" : id}, {"Status" :"P" } ] },callback);
    };
 
+module.exports.getPrepo = function(id, callback){
+    reports.find({"_id" : id}, callback);
+};
+
 module.exports.addReport = function(_id,_title, _type, url, url_2, url_3,callback){
 	var id = _id.toString();
 	new reports({
@@ -127,3 +131,4 @@ module.exports.addLink = function(id, url, callback){
 		             		return callback(doc);
 		             });
 };
+

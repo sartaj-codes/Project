@@ -1,6 +1,6 @@
 app.controller('linking',['$scope', '$http' , function($scope, $http){
 
- 
+
 $scope.findUser = function(){
 	$http({
 		method : 'GET',
@@ -10,6 +10,11 @@ $scope.findUser = function(){
          $scope.Users = response.data;
      });
 };
+
+
+
+
+
 
   console.log("Under Linking");
 }]);

@@ -79,8 +79,8 @@
                         <form class="form-inline ">
                           <div class="form-group ">
                              <h4 style="margin-top: 13px; margin-left: 10px; border-bottom: 1px solid rgba(128, 128, 128, 0.23);">Send Report</h4>
-                             <input type="text" class="form-control" style="margin-left: 14px; width: 257px; border-radius: inherit;" ng-model="Pname" placeholder="Add sender username.. " />
-                             <button class="btn btn-primary" id="bttcl" ng-click="findUser()" ng-disabled ="!Pname">Send</button>
+                             <input type="text" class="form-control" style="margin-left: 14px; width: 257px; border-radius: inherit;" ng-model="Repo_own" placeholder="Add sender username.. " />
+                             <button class="btn btn-primary" id="bttcl" ng-click="send_rep(reps._id,Repo_own)" ng-disabled ="!Repo_own">Send</button>
                           </div>
                        </form>
                       </li>
@@ -92,9 +92,5 @@
     </table>
     </div>
   </div>  
-                   
-
-                    
-                    
 </body>
 </html>

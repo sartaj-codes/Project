@@ -190,6 +190,17 @@ app.post('/accept/:_user/:_id/:_name/:_len/https://res.cloudinary.com/medcare/im
 });
 
 
+app.get('/getPrepou/:_name', function(req, res){
+     var name = req.params._name;
+     P_detail.getPrepou(name, function(err,doc){
+        if(err)
+          res.json(err);
+        else
+          res.json(doc);
+     });
+});
+
+
 
 /*********************************************************************************************************************/
 
@@ -301,14 +312,27 @@ app.post('/upReport', function(req,res){
    });
 });
 
+
+app.get('/getPrepo/:_id', function(req, res){
+     var id = req.params._id;
+     R_Detail.getPrepo(id, function(err,doc){
+        if(err)
+          res.json(err);
+        else
+          res.json(doc);
+     });
+});
+
+
 /*Send Report route here */
-/*app.post('/upRepShare', function(req,res){
-   var id    = req.body.id;
+app.post('/senReport/:_id', function(req,res, next){
+   console.log("Recieved:" + req.body.url_3);
+   var id  = req.params._id;
    var title = req.body.title;
    var type  = req.body.type; 
-   var url   = req.body.url;
-   var url_2 = req.body.url_2;
-   var url_3 = req.body.url_3;
+   var url   = req.body.secure_url;
+   var url_2 = req.body.report_url;
+   var url_3 = req.body.png_url;
    R_Detail.addReport(id, title, type, url, url_2,url_3, function(err,doc){
        if(err)
          res.json(err);
@@ -317,7 +341,7 @@ app.post('/upReport', function(req,res){
       });
   
 });
-*/
+
 
 
 

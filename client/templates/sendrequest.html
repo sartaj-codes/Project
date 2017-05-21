@@ -18,10 +18,10 @@
           border-radius: initial;
 		}
 		.send_req_btt{
-           border: hidden;
-           border-radius: inherit;
+           border-color: black;
+           border-radius: 4px;
            padding: 7px;
-           background-color: grey;
+           
 		}
 		.send_req_user{
           margin-top: 13px;
@@ -45,7 +45,7 @@
                    <div class="form-group send_req_form_2">
                     <br><br>
                     <input type="text" class="send_req_semail form-control" ng-model="Pname" placeholder="Add sender username.. " />
-                    <button class="btn btn-primary send_req_btt" id="bttcl" ng-click="findUser()" ng-disabled ="!Pname">Find Patient</button>
+                    <button class="btn btn-default send_req_btt" id="bttcl" ng-click="findUser()" ng-disabled ="!Pname">Find Patient</button>
                    </div>
                 </form>
          </div>
@@ -67,9 +67,9 @@
                               <H7 style="font-size: smaller;"> sartaj singh</H7>
                           </div>
                           <div class="col-sm-6">   
-                              <button class="send_req_btt btn btn-primary" 
+                              <button class="send_req_btt btn btn-default" 
                                   ng-click="linkAccount(Pid, user._id, myWelcome.name)" >
-                                  Send Request
+                                  {{btn_name}}
                               </button>
                           </div> 
                       </div>
