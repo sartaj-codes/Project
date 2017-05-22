@@ -303,7 +303,7 @@ app.post('/upReport', function(req,res){
      var url_2 = result.secure_url;
      var url_3 = url_2.substr(0, url_2.length -4) + ".png";
      {public_id: 'Report.pdf'};
-     R_Detail.addReport(id, title, type, url, url_2,url_3, function(err,doc){
+     R_Detail.addReport_2(id, title, type, url, url_2,url_3, function(err,doc){
        if(err)
          res.json(err);
        else

@@ -85,6 +85,28 @@ module.exports.addReport = function(_id,_title, _type, url, url_2, url_3,callbac
 
 };
 
+module.exports.addReport_2 = function(_id,_title, _type, url, url_2, url_3,callback){
+	var id = _id.toString();
+	new reports({
+		    title     : _title,
+		    type      : _type,
+		    date      : new Date(),
+		    Status    : "U",
+		    Sender    : id,
+		    Owner     : id,
+		    secure_url: url,
+		    report_url: url_2,
+		    png_url   : url_3
+	}).save(function(err,doc){
+		if(err)
+			return callback(err);
+		else
+			return callback(doc);
+	});
+
+};
+
+
 module.exports.delRepo = function(id,callback){
 	
    reports.remove({_id : id},function(err, doc){
