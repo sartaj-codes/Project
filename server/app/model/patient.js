@@ -32,10 +32,10 @@ var patientSchema = new Schema({
 		type:String
 	},
 
-	link_request   :{ id     : {type: String, required: true, unique : true},
+	link_request   :{ id     : {type: String, unique : true},
 		              name   : {type : String}
 	                },
-	linked_account :{ id       :   {type : String, required: true, unique : true},
+	linked_account :{ id       :   {type : String, unique : true},
 	                  name     :   {type : String},
 	                  reports  :   {type : Number},
 	                  url      :   {type : String}
@@ -61,11 +61,11 @@ var patient = mongoose.model('patients', patientSchema);
 /*-----------This function is for adding new user --------------------------------*/
 module.exports.addUserP = function(callback){
 new patient ({
-	     name       : "Virat Kohli",
-		 username   : "Kohli",
-		 email      : "ViratK@gmail.com",
+	     name       : "Sartajsingh572@gmail.com ",
+		 username   : "sartaj",
+		 email      : "sartaj@gmail.com",
 		 birth      : "08-12-1992",
-		 password   : "Virat",
+		 password   : "sartaj",
 		 secure_url : "https://res.cloudinary.com/medcare/image/upload/v1492921169/z4a8csjtk3p0eoyavisk.png" 
 		}).save(function(err,doc){
 		if(err)
