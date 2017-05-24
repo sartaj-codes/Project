@@ -32,10 +32,10 @@ var patientSchema = new Schema({
 		type:String
 	},
 
-	link_request   :{ id     : {type: String, unique : true},
+	link_request   :{ id     : {type: String, required: true, unique : true},
 		              name   : {type : String}
 	                },
-	linked_account :{ id       :   {type : String, unique : true},
+	linked_account :{ id       :   {type : String, required: true, unique : true},
 	                  name     :   {type : String},
 	                  reports  :   {type : Number},
 	                  url      :   {type : String}
@@ -61,11 +61,11 @@ var patient = mongoose.model('patients', patientSchema);
 /*-----------This function is for adding new user --------------------------------*/
 module.exports.addUserP = function(callback){
 new patient ({
-	     name       : "Sartajsingh572@gmail.com ",
-		 username   : "sartaj",
-		 email      : "sartaj@gmail.com",
+	     name       : "Virat Kohli",
+		 username   : "Kohli",
+		 email      : "ViratK@gmail.com",
 		 birth      : "08-12-1992",
-		 password   : "sartaj",
+		 password   : "Virat",
 		 secure_url : "https://res.cloudinary.com/medcare/image/upload/v1492921169/z4a8csjtk3p0eoyavisk.png" 
 		}).save(function(err,doc){
 		if(err)
@@ -78,9 +78,9 @@ new patient ({
 
 
 /*---------------- Below all functions are for data Mainpulation in pateints database -------------------------------*/ 
-module.exports.showUsers = function(name, callback){
+module.exports.showUsers = function(name, id, callback){
 	
-	patient.find({"name" : name}, {name : 1, secure_url : 1},  callback);
+	patient.find( {  $and : [{"_id" : { $ne : id} }, {"name" : name}] }, callback);
 };
 
 /*---------------  Detele user -------------------------*/
@@ -141,8 +141,8 @@ module.exports.getInfo = function(callback){
 	patient.find({},callback);
 };
 
-module.exports.getPrepou = function(_name, callback){
-	patient.find({"name" : _name},callback);
+module.exports.getPrepou = function(_name, id, callback){
+	patient.find( {  $and : [{"_id" : { $ne : id} }, {"name" : _name}] },callback);
 };
 /*--------------------------------------------------------------------------------------------------------------*/
 

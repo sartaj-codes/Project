@@ -209,11 +209,11 @@
                    <h4 class="modal-title" style="text-align: center;">Change Pofile Picture</h4>
                 </div>
                 <div class="modal-body ">
-                  <form class="upload-form1" action = "http://localhost:8081/up" method="POST" enctype="multipart/form-data" name="frm" target="_self" novalidate>
+                  <form class="upload-form1"  enctype="multipart/form-data" name="frm" target="_self" novalidate>
                     <input type="text" name="abc" style="display: none;" ng-model="Pid"/>
-                    <input type="file" name = "file" id="upo" ng-model="path" /><br>
+                    <input id="upo" type="file" file-model = "myFile"  ng-model = "path" /><br>
                     <div class="upload-button">
-                        <button class="btn  upload-form-button1"  ng-click="funcR()" ng-disabled="!(path)" id="ds1cmp" >
+                        <button class="btn  upload-form-button1" data-dismiss = "modal" ng-click="uploadFile()" ng-disabled="!(path)" id="ds1cmp" >
                           Submit
                         </button>
                     </div>
@@ -263,32 +263,7 @@
        </div>
  <!-- ******************************************************************************************************************--> 
 <!-- **************************** For sending request to new user module will here  *********************************-->       
-        <!-- <div class=' wr1'>
-             <div class='content'>
-               <div class="dn2 nav navbar-default "> 
-                <div class="navbar-header ">
-                    <a href="#" class="i1  navbar-brand" >
-                       <img  src="img/sendrq.jpg" height="50px" width="50px" style="display: inline; margin-top: -15%; ">
-                      Link Account
-                   </a>
-                 </div>
-                 <form>
-                    <br><br>
-                    <input type="email" class="semail" placeholder="Add sender username.. " /><br>
-                    <button class="btn btn-primary btt" id="bttcl" >Send</button>
-                </form>
-             </div>
-          </div>
-        </div>
         
-       <div class=" familym col-md-2 pull-right" style="background-color: white; font-family: monospace;">
-             <h4>Family Members</h4>
-             <hr>
-               <div ng-repeat="reps in myWelcome.Reports">
-                 <h4>Name</h4>
-               </div>
-        </div>
-</div>-->
  <script>
 $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip(); 

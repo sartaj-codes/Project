@@ -3,12 +3,16 @@ var app        = express();
 var cloudinary = require('cloudinary');
 var path       = require('path');
 var fs         = require('fs');
+var morgan     = require('morgan');
 var mongoose   = require('mongoose');
 var bodyParser = require('body-parser'); 
 var P_detail   = require('./app/model/patient'); // Linking model patient
 var R_Detail   = require('./app/model/Reports'); // Linking model Reports
 app.use(bodyParser.urlencoded({extended: true}));  //use body parser so we can get info from POST and/or URL parameters.
 app.use(bodyParser.json());
+
+/*Its used for log request */
+app.use(morgan('dev'));
 
 /* Its middleware used send or fetch multipart data to Backend nodejs */ 
 var multiparty = require('connect-multiparty'),
@@ -38,7 +42,7 @@ app.post('/new',function(req,res){
 	P_detail.addUserP(function(err,doc){
         if(err)
 			res.json(err);
-		else
+		elsehpwh
 			res.json({sucess:true});
     });
 });
@@ -57,9 +61,10 @@ app.delete('/deluser/:_id', function(req,res){
 });
 
 /* This route is for Searching Patient to link their account */
-app.get('/showall/:_name', function(req,res){
+app.get('/showall/:_name/:_id', function(req,res){
 	var name = req.params._name;
-	P_detail.showUsers(name, function(err,doc){
+  var id   = req.params._id;
+	P_detail.showUsers(name, id, function(err,doc){
 		if(err)
 			res.json(err);
 		else
@@ -97,21 +102,25 @@ app.post('/changeAProfile', function(req,res){
 /* This route is for upload an image and using Cloud to handle Images */
 app.post('/up', function(req,res){
    var file = req.files.file.path;
-    console.log(file);
-    cloudinary.uploader.upload(file, function(result) { 
-     var url = result.secure_url;
-     var id  = req.body.abc; 
-     console.log(url);
-     console.log(id);
-     P_detail.addImageUrl(id,url, function(err,doc){
-     	if(err)
-     		res.json(err);
-     	else
-     		res.redirect('/');
-     })
-     
+   cloudinary.uploader.upload(file, function(result) { 
+     res.json(result.secure_url);
    });
 });
+
+
+/* Added new route for image upload */
+app.post('/upRepEx/:_id/%22https://res.cloudinary.com/medcare/image/upload/:ty1/:ty2%22', function(req, res){
+    var id  = req.params._id;
+    var url = "https://res.cloudinary.com/medcare/image/upload/"+req.params.ty1+"/"+req.params.ty2;
+    P_detail.addImageUrl(id,url, function(err,doc){
+      if(err)
+        res.json(err);
+      else
+          res.send({redirect: '/'});
+     });   
+
+});
+
 
 /* This route is for Admin to check all the user in database */
 app.get('/infor', function(req,res){
@@ -190,9 +199,10 @@ app.post('/accept/:_user/:_id/:_name/:_len/https://res.cloudinary.com/medcare/im
 });
 
 
-app.get('/getPrepou/:_name', function(req, res){
+app.get('/getPrepou/:_name/:_id', function(req, res){
      var name = req.params._name;
-     P_detail.getPrepou(name, function(err,doc){
+     var id   = req.params._id;
+     P_detail.getPrepou(name, id, function(err,doc){
         if(err)
           res.json(err);
         else
@@ -283,7 +293,7 @@ app.delete('/delrepos/:data', function(req,res){
 
    var _id = req.params.data;
   // console.log("_id :");
-   console.log(_id);
+  // console.log(_id);
    R_Detail.delRepo(_id,function(err,doc){
    	   if(err)
    	   	res.json(err);
@@ -326,7 +336,7 @@ app.get('/getPrepo/:_id', function(req, res){
 
 /*Send Report route here */
 app.post('/senReport/:_id', function(req,res, next){
-   console.log("Recieved:" + req.body.url_3);
+   //console.log("Recieved:" + req.body.url_3);
    var id  = req.params._id;
    var title = req.body.title;
    var type  = req.body.type; 
