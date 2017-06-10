@@ -5,6 +5,8 @@
   After Linking sender can access opponent's Reports (Linking is One way here) <br>
  .
 ### Technologies Used
-    Frontend   : HTML/CSS Bootstrap AngularJs
+ ```sh
+    Frontend   : HTML/CSS Bootstrap AngularJs
     ServerSide : NodeJs Mongoose
     DataBase   : MongoDB
+```
