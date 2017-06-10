@@ -6,5 +6,5 @@
  .
 # Technologies Used
     Frontend   : HTML/CSS Bootstrap AngularJs
-    ServerSide : NodeJs
-    DataBase   : MongoDB
+    ServerSide : NodeJs, Mongoose
+    DataBase   : MongoDB
