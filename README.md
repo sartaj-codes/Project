@@ -4,7 +4,7 @@
   Link there account with their parents or with any other known users. <br>
   After Linking sender can access opponent's Reports (Linking is One way here) <br>
  .
-# Technologies Used
+### Technologies Used
     Frontend   : HTML/CSS Bootstrap AngularJs
-    ServerSide : NodeJs, Mongoose
+    ServerSide : NodeJs Mongoose
     DataBase   : MongoDB
